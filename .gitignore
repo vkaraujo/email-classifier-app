@@ -6,3 +6,4 @@ uploads/
 *.pdf
 node_modules/
 .env
+.coverage
