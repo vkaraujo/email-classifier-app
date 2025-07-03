@@ -1,0 +1,6 @@
+flask
+nltk
+pdfminer.six
+openai
+python-dotenv
+gunicorn
