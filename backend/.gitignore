@@ -1,1 +1,8 @@
+__pycache__/
+*.pyc
+venv/
+uploads/
+*.txt
+*.pdf
+node_modules/
 .env
