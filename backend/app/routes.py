@@ -1,5 +1,8 @@
 from flask import Blueprint, request, jsonify
-from app.services import process_uploaded_file
+from app.pipeline import process_uploaded_file
+
+import logging
+logging.basicConfig(level=logging.INFO)
 
 routes = Blueprint('routes', __name__)
 
@@ -16,10 +19,13 @@ def upload_file():
     file = file_or_error
 
     try:
-        filename, text_content = process_uploaded_file(file)
-        print(f"--- Conteúdo extraído de {filename} ---")
-        print(text_content[:1000])
-        return jsonify({"message": f"Arquivo {filename} processado com sucesso."})
+        classification = process_uploaded_file(file)
+        logging.info(f"--- Classificação --- {classification}")
+        return jsonify({
+            "message": "Arquivo processado com sucesso.",
+            "categoria": classification.get("categoria"),
+            "resposta_sugerida": classification.get("resposta_sugerida")
+        })
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
 
