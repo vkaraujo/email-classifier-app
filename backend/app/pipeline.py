@@ -25,3 +25,16 @@ def process_uploaded_file(file):
         delete_file(filepath)
 
     return classification
+
+def process_raw_text(text):
+    cleaned_text = preprocess_text(text)
+    text_hash = get_text_hash(cleaned_text)
+
+    cached_result = cache.get(text_hash)
+    if cached_result:
+        logging.info("Cache hit (text) - reutilizando classificação anterior.")
+        return cached_result
+
+    classification = classify_and_suggest(cleaned_text)
+    cache.set(text_hash, classification)
+    return classification
