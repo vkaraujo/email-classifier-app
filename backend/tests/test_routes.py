@@ -1,12 +1,10 @@
 import io
 import pytest
-from app import app
+from app import app as flask_app
 
 @pytest.fixture
 def client():
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
+    return flask_app.test_client()
 
 def test_upload_txt_file(client):
     data = {
@@ -15,11 +13,37 @@ def test_upload_txt_file(client):
     response = client.post('/upload', data=data, content_type='multipart/form-data')
     assert response.status_code == 200
     json_data = response.get_json()
-    assert 'categoria' in json_data
-    assert 'resposta_sugerida' in json_data
-    print(json_data)
+    
+    assert 'results' in json_data
+    assert isinstance(json_data['results'], list)
+    assert len(json_data['results']) == 1
+    
+    result = json_data['results'][0]
+    assert 'categoria' in result
+    assert 'resposta_sugerida' in result
+    assert result['file'] == 'test.txt'
+    assert result['type'] == 'file'
+
+def test_upload_text(client):
+    data = {
+        'text': "Este é um texto direto para classificar."
+    }
+    response = client.post('/upload', data=data)
+    assert response.status_code == 200
+    json_data = response.get_json()
+    
+    assert 'results' in json_data
+    assert isinstance(json_data['results'], list)
+    assert len(json_data['results']) == 1
+    
+    result = json_data['results'][0]
+    assert 'categoria' in result
+    assert 'resposta_sugerida' in result
+    assert result['type'] == 'text'
 
 def test_no_file_uploaded(client):
-    response = client.post('/upload', data={}, content_type='multipart/form-data')
+    response = client.post('/upload', data={})
     assert response.status_code == 400
-    assert 'error' in response.get_json()
+    json_data = response.get_json()
+    assert 'error' in json_data
+
