@@ -1,3 +1,10 @@
+"""
+Módulo routes
+
+Define as rotas HTTP da aplicação Flask para processar uploads de arquivos ou textos.
+Encaminha para o pipeline de processamento e retorna a classificação e resposta sugerida.
+"""
+
 from flask import Blueprint, request, jsonify
 from app.pipeline import process_uploaded_file, process_raw_text
 
@@ -6,12 +13,37 @@ logging.basicConfig(level=logging.INFO)
 
 routes = Blueprint('routes', __name__)
 
-@routes.route("/")
-def hello():
-    return "Hello from Flask!"
-
 @routes.route("/upload", methods=["POST"])
 def upload():
+    """
+    Rota POST /upload
+
+    Recebe arquivos (TXT ou PDF) e/ou texto bruto via formulário multipart.
+    Processa o conteúdo chamando o pipeline, que realiza extração, pré-processamento,
+    classificação via IA e armazenamento em cache.
+
+    O endpoint aceita:
+    - múltiplos arquivos enviados no campo "file"
+    - texto enviado no campo "text"
+
+    Retorna:
+        JSON:
+        {
+            "results": [
+                {
+                    "type": "file" ou "text",
+                    "file": "nome_do_arquivo.txt" (quando for arquivo),
+                    "categoria": "Produtivo" ou "Improdutivo",
+                    "resposta_sugerida": "..."
+                },
+                ...
+            ]
+        }
+
+    Status Codes:
+        - 200: Sucesso no processamento (mesmo com alguns erros parciais nos arquivos).
+        - 400: Nenhum arquivo ou texto foi enviado.
+    """
     results = []
 
     files = request.files.getlist("file")

@@ -1,0 +1,61 @@
+swagger: "2.0"
+info:
+  title: Email Classifier API
+  description: >
+    API para classificar emails em "Produtivo" ou "Improdutivo" e sugerir uma resposta automática.
+  version: "1.0.0"
+
+schemes:
+  - http
+
+consumes:
+  - multipart/form-data
+produces:
+  - application/json
+
+paths:
+  /upload:
+    post:
+      summary: Faz o upload de arquivos de email (.txt/.pdf) ou envia texto bruto
+      parameters:
+        - name: file
+          in: formData
+          description: Um ou mais arquivos (.txt ou .pdf)
+          required: false
+          type: file
+          collectionFormat: multi
+        - name: text
+          in: formData
+          description: Texto bruto do email
+          required: false
+          type: string
+      responses:
+        200:
+          description: Classificação dos emails enviados
+          schema:
+            type: object
+            properties:
+              results:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      example: file
+                    file:
+                      type: string
+                      example: email.txt
+                    categoria:
+                      type: string
+                      example: Produtivo
+                    resposta_sugerida:
+                      type: string
+                      example: Obrigado pelo email. Retornaremos em breve.
+        400:
+          description: Requisição inválida
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
