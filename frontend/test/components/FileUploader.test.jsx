@@ -18,7 +18,7 @@ describe('FileUploader', () => {
 
   it('renders without crashing', () => {
     render(<FileUploader />)
-    expect(screen.getByText(/Email Classifier/i)).toBeInTheDocument()
+    expect(screen.getByText(/Classificador de E-mails/i)).toBeInTheDocument()
   })
 
   it('uploads text and shows result', async () => {
