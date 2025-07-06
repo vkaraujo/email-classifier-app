@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL || "https://email-classifier-app-oizq.onrender.com";
 
 const uploadService = {
   async uploadFile(file) {

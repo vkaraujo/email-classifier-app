@@ -57,6 +57,9 @@ export default function FileUploader() {
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="bg-white shadow-md rounded p-6 w-full max-w-4xl">
         <h1 className="text-2xl font-bold mb-4 text-center">Classificador de E-mails</h1>
+        <p className="text-center text-sm text-gray-600 mb-4">
+          O servidor pode levar alguns segundos para responder se estiver em repouso.
+        </p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <FileInput files={files} setFiles={setFiles} disabled={loading} />
