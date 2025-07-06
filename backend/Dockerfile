@@ -16,6 +16,8 @@ RUN apt-get update && \
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+RUN python -m nltk.downloader punkt stopwords
+
 # Definir variável de ambiente
 ENV FLASK_APP=app
 ENV FLASK_RUN_HOST=0.0.0.0

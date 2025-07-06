@@ -12,8 +12,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import hashlib
 
-nltk.download("punkt", quiet=True)
-nltk.download("stopwords", quiet=True)
+# nltk.download("punkt", quiet=True)
+# nltk.download("stopwords", quiet=True)
 
 def preprocess_text(text):
     """
