@@ -16,6 +16,35 @@ Este projeto é uma solução web para **classificar emails recebidos** em uma e
 - **Testes unitários e integrados**
 - Makefile para CI/CD simples
 
+## 🚀 Como rodar o projeto com Docker
+
+### Usando Docker + Docker Compose (recomendado)
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/seuusuario/email-classifier-app.git
+   cd email-classifier-app
+   ```
+
+2. Crie um arquivo .env na raiz do projeto (mesmo nível do docker-compose.yml) e adicione sua chave do OpenAI:
+    ```bash
+    OPENAI_API_KEY=sk-...
+    ```
+
+3. Rode o projeto:
+    ```bash
+   docker-compose up --build
+   ```
+4. O frontend estará disponível em:
+    ```bash
+   http://localhost:3000
+   ```
+
+5. O backend (caso queira testar via curl ou Postman) em:
+    ```bash
+   http://localhost:5000
+   ```
+
 ## Tecnologias utilizadas
 
 - **Python + Flask** (backend)
