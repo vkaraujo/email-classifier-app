@@ -1,9 +1,11 @@
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 const uploadService = {
   async uploadFile(file) {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch("/upload", {
+    const response = await fetch(`${API_URL}/upload`, {
       method: "POST",
       body: formData,
     });
@@ -17,7 +19,7 @@ const uploadService = {
     const formData = new FormData();
     formData.append("text", text);
 
-    const response = await fetch("/upload", {
+    const response = await fetch(`${API_URL}/upload`, {
       method: "POST",
       body: formData,
     });
