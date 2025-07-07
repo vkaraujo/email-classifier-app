@@ -5,6 +5,16 @@ Este projeto é uma solução web para **classificar emails recebidos** em uma e
 - Classificar automaticamente o email como `Produtivo` ou `Improdutivo`.
 - Gerar uma **resposta sugerida**, educada e contextual.
 
+## 📚 Documentação
+
+- 📖 **Código Python (pdoc)**:  
+  [https://vkaraujo.github.io/email-classifier-app/app.html](https://vkaraujo.github.io/email-classifier-app/app.html)
+
+- 📝 **Documentação OpenAPI (Swagger UI)**:  
+  [https://email-classifier-app-oizq.onrender.com/apidocs/](https://email-classifier-app-oizq.onrender.com/apidocs/)
+
+- 🌐 **Aplicação Frontend**:  
+  [https://email-classifier-app-1.onrender.com/](https://email-classifier-app-1.onrender.com/)
 
 ## Diferenciais implementados
 
